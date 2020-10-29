@@ -19,7 +19,7 @@ The visuals of the game are inspired by the music video of Dua Lipa's recent son
 Please see: https://www.youtube.com/watch?v=TUVcZfQe-Kw 
 
 # 1) Modifications 
-- Added a start page, button, and a short set of instructions. 
+- Added a start page, start button, and a short set of instructions. 
 - Added lives. 
 - Added levels to the game which will increase with time. 
 - Added a feature so that as the level increases bonus items (diamonds) will start falling from the sky which will grant lives instead of taking them as enemies (disco balls) do. 
@@ -36,13 +36,7 @@ Please see: https://www.youtube.com/watch?v=TUVcZfQe-Kw
 
 # 3) Netlify Link 
 
-
-### Submission
-
-- Open a PR, as you normally would, against the parent repository.
-- Be sure to add screenshot(s) to the PR.
-- Deploy the project to Netlify
-  - View this guide: https://docs.google.com/document/d/1J7ff9h77RMrQadgCM54eziW_Rj5_PAHYpQHYjf2ojZU/edit?usp=sharing
+https://happy-hopper-e9f29a.netlify.app/ 
 
 
 // ## Useful Links
