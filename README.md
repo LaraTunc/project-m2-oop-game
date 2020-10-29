@@ -1,6 +1,6 @@
 # Lara's Object Oriented Programming Game Project
 
-<p align="center"><img src="./images/screenshot.PNG"></p>
+<p align="center"><img src="./images/screenshot1.PNG"></p>
 
 # Game Rules 
 
@@ -10,6 +10,7 @@ Your goal, as the player, is to keep Dua Lipa (your avatar) dancing as long as p
 The disco balls will take lives, whereas the diamonds will grant lives. So, try to run from the disco balls and catch the diamonds. 
 
 Please note that in time, your level will increase and similarly the speed of the enemies coming down from the sky will increase. 
+
 GOOD LUCK! 
 
 # Inspiration 
@@ -29,7 +30,7 @@ Please see: https://www.youtube.com/watch?v=TUVcZfQe-Kw
 
 # 2) Screenshots 
 
-<p align="center"><img src="./images/screenshot.PNG"></p>
+<p align="center"><img src="./images/screenshot1.PNG"></p>
 <p align="center"><img src="./images/screenshot2.PNG"></p>
 <p align="center"><img src="./images/screenshot3.PNG"></p>
 
