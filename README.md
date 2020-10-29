@@ -39,5 +39,3 @@ Please see: https://www.youtube.com/watch?v=TUVcZfQe-Kw
 https://happy-hopper-e9f29a.netlify.app/ 
 
 
-// ## Useful Links
-// - https://javascript.info/keyboard-events
