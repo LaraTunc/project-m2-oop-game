@@ -51,14 +51,51 @@ class Engine {
       // We find the next available spot and, using this spot, we create an enemy.
       // We add this enemy to the enemies array
       const spot = nextEnemySpot(this.enemies);
-      this.enemies.push(new Enemy(this.root, spot));
+      // this.enemies.push(new Enemy(this.root, spot));
+      whileLoopCount++
+      if (whileLoopCount%10===0 && level>0) { 
+        this.enemies.push(new Bonus(this.root, spot));
+      } else { 
+        this.enemies.push(new Enemy(this.root, spot));
+      }; 
     }
 
     // We check if the player is dead. If he is, we alert the user
     // and return from the method (Why is the return statement important?)
-    if (this.isPlayerDead()) {
-      window.alert('Game over');
-      return;
+    if (this.isPlayerHit()) {
+      // lifecount--;
+      let changeLifeCount= document.querySelector(".lifecountDiv");
+      changeLifeCount.innerText= "LIVES\n"+ lifecount;
+      changeLifeCount.style.boxShadow="0px 0px 114px 12px red";
+      setTimeout(function(){ 
+        changeLifeCount.style.boxShadow="0px 0px 114px 12px rgba(1,213,218,1)"; }, 1000);
+      console.log(lifecount); 
+      if(lifecount===0) { 
+        divApp.append(placeholderDiv);
+        message.innerText="GAME OVER";
+        placeholderDiv.append(message);
+        placeholderDiv.removeChild(message2);
+        placeholderDiv.removeChild(message3);
+        buttonStart.innerText="RESET";
+        placeholderDiv.append(buttonStart);
+        duaLipa.pause();
+        buttonStart.addEventListener("click",()=> { 
+          location.reload();
+        });
+        //window.alert('Game over');
+        return;
+      }; 
+    }
+
+    loopCount ++; 
+
+    if(loopCount%1000===0) { 
+      level ++; 
+      let changeLevel = document.querySelector(".levelDiv");
+      changeLevel.innerText= "LEVEL\n"+ level;
+      changeLevel.style.boxShadow="0px 0px 114px 12px green";
+      setTimeout(function(){ 
+        changeLevel.style.boxShadow="0px 0px 114px 12px rgba(1,213,218,1)"; }, 1000);
     }
 
     // If the player is not dead, then we put a setTimeout to run the gameLoop in 20 milliseconds
@@ -67,7 +104,32 @@ class Engine {
 
   // This method is not implemented correctly, which is why
   // the burger never dies. In your exercises you will fix this method.
-  isPlayerDead = () => {
-    return false;
+  isPlayerHit = () => { 
+    let hit=false;
+    this.enemies.forEach((enemy)=> {  
+      if(Math.round(enemy.y)>=this.player.y-ENEMY_HEIGHT+5 && enemy.x===this.player.x) { 
+        if( enemy.constructor.name==="Enemy") { 
+          console.log ("true", "enemy:", enemy, "player:", this.player);
+          hit=true;
+          enemy.destroyed=true; 
+          enemy.root.removeChild(enemy.domElement);
+          lifecount--;
+          loseAudio.play();
+        };
+        if( enemy.constructor.name==="Bonus") { 
+          console.log ("true", "bonus:", enemy, "player:", this.player);
+          hit=true;
+          enemy.destroyed=true; 
+          enemy.root.removeChild(enemy.domElement);
+          lifecount++;
+          winAudio.play();
+        };
+      };
+    }); 
+    if (hit) {
+      return true;
+    } else {
+      return false;
+    }; 
   };
 }

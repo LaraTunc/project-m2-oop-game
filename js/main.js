@@ -24,4 +24,10 @@ const keydownHandler = (event) => {
 document.addEventListener('keydown', keydownHandler);
 
 // We call the gameLoop method to start the game
-gameEngine.gameLoop();
+//gameEngine.gameLoop();
+
+buttonStart.addEventListener("click",()=> {
+  divApp.removeChild(placeholderDiv);
+  duaLipa.play();
+  gameEngine.gameLoop();
+});

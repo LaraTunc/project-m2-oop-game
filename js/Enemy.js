@@ -42,10 +42,10 @@ class Enemy {
     this.domElement.style.left = `${this.x}px`;
     this.domElement.style.top = `${this.y}px`;
     this.domElement.style.zIndex = 5;
-
+    this.domElement.style.width= ENEMY_WIDTH; 
     // Show that the user can actually see the img DOM node, we append it to the root DOM node.
     theRoot.appendChild(this.domElement);
-    this.speed = Math.random() / 2 + 0.25;
+    this.speed = Math.random() / 2 + 0.25*(level+1);
   }
 
   // We set the speed property of the enemy. This determines how fast it moves down the screen.
@@ -62,9 +62,37 @@ class Enemy {
     // If the y position of the DOM element is greater than the GAME_HEIGHT then the enemy is at the bottom
     // of the screen and should be removed. We remove the DOM element from the root DOM element and we set
     // the destroyed property to indicate that the enemy should no longer be in play
-    if (this.y > GAME_HEIGHT) {
+    if (this.y > GAME_HEIGHT-ENEMY_HEIGHT+5) {
       this.root.removeChild(this.domElement);
+      this.destroyed = true;
+    }
+  }
+}
 
+class Bonus {
+  constructor(theRoot, enemySpot) {
+    this.root = theRoot;
+    this.spot = enemySpot;
+    this.x = enemySpot * ENEMY_WIDTH;
+    this.y = -ENEMY_HEIGHT;
+    this.destroyed = false;
+    this.domElement = document.createElement('img');
+    this.domElement.src = './images/bonus4.png';
+    this.domElement.style.position = 'absolute';
+    this.domElement.style.left = `${this.x}px`;
+    this.domElement.style.top = `${this.y}px`;
+    this.domElement.style.zIndex = 5;
+    this.domElement.style.width= ENEMY_WIDTH; 
+    theRoot.appendChild(this.domElement);
+    this.speed = Math.random() / 2 + 0.25*(level+1);
+  }
+
+  update(timeDiff) {
+    this.y = this.y + timeDiff * this.speed;
+    this.domElement.style.top = `${this.y}px`;
+
+    if (this.y > GAME_HEIGHT-ENEMY_HEIGHT+5) {
+      this.root.removeChild(this.domElement);
       this.destroyed = true;
     }
   }

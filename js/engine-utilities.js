@@ -8,7 +8,7 @@
 // The possibilities are 0, 1, 2, 3 or 4.
 const nextEnemySpot = (enemies) => {
   // enemySpots will refer to the number of spots available (can you calculate it?)
-  const enemySpots = GAME_WIDTH / ENEMY_WIDTH;
+  const enemySpots = Math.floor(GAME_WIDTH / ENEMY_WIDTH);
 
   // To find out where to place an enemy, we first need to find out which are the spots available.
   // We don't want to place two enemies in the same lane. To accomplish this, we first create an
@@ -16,7 +16,10 @@ const nextEnemySpot = (enemies) => {
   // We then use forEach to iterate through all the enemies.
   // If you look at the constructor of the Enemy class, you can see that every instance will have a spot property.
   // We can use this property to modify the spotsTaken array.
-  const spotsTaken = [false, false, false, false, false];
+  const spotsTaken = [];
+  for (let i=0; i<enemySpots; i++) { 
+    spotsTaken.push(false); 
+  }; 
   enemies.forEach((enemy) => {
     spotsTaken[enemy.spot] = true;
   });
@@ -44,11 +47,56 @@ const addBackground = (root) => {
 
   // We set its src attribute and the height and width CSS attributes
   bg.src = 'images/stars.png';
-  bg.style.height = `${GAME_HEIGHT}px`;
-  bg.style.width = `${GAME_WIDTH}px`;
+  bg.style.objectFit="cover";
+  bg.style.height = "100%";//`${GAME_HEIGHT}px`;
+  bg.style.width = "100%";//`${GAME_WIDTH}px`;
 
   // We add it to the root DOM node
   root.append(bg);
+
+  let lifecountDiv = document.createElement('div'); 
+  lifecountDiv.style.zIndex = 50;
+  lifecountDiv.style.position = 'absolute';
+  lifecountDiv.style.top = "30px";
+  lifecountDiv.style.right = "10px";
+  lifecountDiv.style.height = "80px";
+  lifecountDiv.style.width = "80px";
+  lifecountDiv.style.opacity="0.9";
+  lifecountDiv.style.boxShadow="0px 0px 114px 12px rgba(1,213,218,1)";
+  lifecountDiv.innerText= "LIVES\n"+ lifecount;
+  lifecountDiv.setAttribute("class","lifecountDiv");
+  lifecountDiv.style.display="flex"; 
+  lifecountDiv.style.justifyContent="center";
+  lifecountDiv.style.alignItems="center";
+  lifecountDiv.style.textAlign="center";
+  lifecountDiv.style.color="#cf7421";
+  lifecountDiv.style.fontSize="23px";
+  lifecountDiv.style.fontFamily="Arimo, sans-serif";
+  lifecountDiv.style.textShadow="0 0 3px #cf7421";
+  root.append(lifecountDiv);
+
+  let levelDiv = document.createElement('div'); 
+  levelDiv.style.zIndex = 50;
+  levelDiv.style.position = 'absolute';
+  levelDiv.style.top = "120px";
+  levelDiv.style.right = "10px";
+  levelDiv.style.height = "80px";
+  levelDiv.style.width = "80px";
+  levelDiv.style.opacity="0.9";
+  levelDiv.style.boxShadow="0px 0px 114px 12px rgba(1,213,218,1)";
+  levelDiv.innerText= "LEVEL\n"+ level;
+  levelDiv.setAttribute("class","levelDiv");
+  levelDiv.style.display="flex"; 
+  levelDiv.style.justifyContent="center";
+  levelDiv.style.alignItems="center";
+  levelDiv.style.textAlign="center";
+  levelDiv.style.color="#cf7421";
+  levelDiv.style.fontSize="23px";
+  levelDiv.style.fontFamily="Arimo, sans-serif";
+  levelDiv.style.textShadow="0 0 3px #cf7421";
+  root.append(levelDiv);
+
+
 
   // We don't want the enemies to go beyond the lower edge of the image
   // so we place a white div to hide the enemies after they reach the bottom.
@@ -61,6 +109,6 @@ const addBackground = (root) => {
   whiteBox.style.top = `${GAME_HEIGHT}px`;
   whiteBox.style.height = `${ENEMY_HEIGHT}px`;
   whiteBox.style.width = `${GAME_WIDTH}px`;
-  whiteBox.style.background = '#fff';
-  root.append(whiteBox);
+  whiteBox.style.background = 'black';
+  //root.append(whiteBox);
 };
